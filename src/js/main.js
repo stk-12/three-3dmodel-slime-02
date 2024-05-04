@@ -147,6 +147,8 @@ class Main {
 
       this.groupChild.add(this.model);
 
+      // this.groupChild.scale.set(100, 100, 100);
+
       this._loadAnimation();
 
       this._update();
@@ -222,7 +224,7 @@ class Main {
 
     // モデルアニメーション
     if(this.mixer) {
-      this.mixer.update(this.clock.getDelta());
+      this.mixer.update(this.clock.getDelta() * 1.5);
     }
 
 
