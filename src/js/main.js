@@ -33,6 +33,8 @@ class Main {
     this.model = null;
     this.animations = null;
     this.mixer = null;
+    this.animationActions = {};
+
     this.clock = new THREE.Clock();
 
     this.scene = new THREE.Scene();
@@ -115,27 +117,44 @@ class Main {
       const model = gltf.scene;
 
       this.animations = gltf.animations;
+
+      console.log(this.animations);
+
       if(this.animations && this.animations.length) {
         //Animation Mixerインスタンスを生成
         this.mixer = new THREE.AnimationMixer(model);
 
-        //全てのAnimation Clipに対して
-        for (let i = 0; i < this.animations.length; i++) {
-          let animation = this.animations[i];
+        // //全てのAnimation Clipに対して
+        // for (let i = 0; i < this.animations.length; i++) {
+        //   let animation = this.animations[i];
 
-          //Animation Actionを生成
-          let action = this.mixer.clipAction(animation) ;
+        //   //Animation Actionを生成
+        //   let action = this.mixer.clipAction(animation);
 
-          //ループ設定
-          // action.setLoop(THREE.LoopOnce); // 1回再生
-          action.setLoop(THREE.LoopRepeat); // ループ再生
+        //   //ループ設定
+        //   // action.setLoop(THREE.LoopOnce); // 1回再生
+        //   action.setLoop(THREE.LoopRepeat); // ループ再生
 
-          //アニメーションの最後のフレームでアニメーションが終了
-          // action.clampWhenFinished = true;
+        //   //アニメーションの最後のフレームでアニメーションが終了
+        //   // action.clampWhenFinished = true;
 
-          //アニメーションを再生
-          action.play();
-        }
+        //   //アニメーションを再生
+        //   action.play();
+        // }
+
+        // アニメーション1
+        const animationBounds = THREE.AnimationClip.findByName(this.animations, 'boundsAction');
+        let actionBounds = this.mixer.clipAction(animationBounds);
+        actionBounds.setLoop(THREE.LoopRepeat); // ループ再生
+        actionBounds.play();
+        this.animationActions['boundsAction'] = actionBounds;
+
+        // アニメーション2
+        const animationJump = THREE.AnimationClip.findByName(this.animations, 'jumpAction');
+        let actionJump = this.mixer.clipAction(animationJump);
+        actionJump.setLoop(THREE.LoopOnce);
+        // actionJump.play();
+        this.animationActions['jumpAction'] = actionJump;
       }
 
       // model.scale.set(100.0, 100.0, 100.0);
