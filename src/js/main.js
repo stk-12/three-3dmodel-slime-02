@@ -253,6 +253,20 @@ class Main {
     requestAnimationFrame(this._update.bind(this));
   }
 
+  // _playAnimation(name) {
+  //   const action = this.animationActions[name];
+  //   if(action) {
+  //     action.play();
+  //   }
+  // }
+
+  _onClick() {
+    // 再生時間をリセットしてから再生
+    this.animationActions["jumpAction"].stop();
+    this.animationActions["jumpAction"].time = 0;
+    this.animationActions["jumpAction"].play();
+  }
+
   _initMouseStalker() {
     this.stalker.classList.add('is-active');
   }
@@ -283,6 +297,8 @@ class Main {
     window.addEventListener("beforeunload", this._scrollReset.bind(this));
     window.addEventListener("mousemove", this._onMousemove.bind(this));
     window.addEventListener("mousemove", this._initMouseStalker.bind(this));
+
+    window.addEventListener("click", this._onClick.bind(this));
   }
 
 }
