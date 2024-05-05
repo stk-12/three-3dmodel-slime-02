@@ -87,24 +87,16 @@ canvas {
   position: fixed;
   top: 0;
   left: 0;
-  width: 1px;
-  height: 1px;
+  width: 90px;
+  height: 90px;
   z-index: 100;
-  // mix-blend-mode: soft-light;
-  // opacity: 0;
-  // transform: scale(0);
-  // transition: 0.3s;
-  &.is-active {
-    // opacity: 1;
-    // transform: scale(1);
-  }
 
   span {
     font-size: 28px;
     line-height: 0.8;
     color: #fff;
     position: absolute;
-    top: 0;
+    top: 3px;
     left: 0;
     transform: translate(-50%, -50%);
     pointer-events: none;
@@ -128,7 +120,7 @@ canvas {
     transform: scale(0) translate(-50%, -50%);
     // animation: scaleUp 3.0s cubic-bezier(0.87, 0, 0.13, 1) infinite;
 
-    transition: transform 0.4s;
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
   &.is-active {
@@ -136,10 +128,17 @@ canvas {
       opacity: 1;
     }
     &::before {
+      transition: transform 0.6s;
       transform: scale(1.0) translate(-50%, -50%);
     }
   }
 
+  &:active {
+    &::before {
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transform: scale(0.8) translate(-60%, -60%);
+    }
+  }
 
 }
 
