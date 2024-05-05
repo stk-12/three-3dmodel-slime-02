@@ -90,11 +90,27 @@ canvas {
   width: 1px;
   height: 1px;
   z-index: 100;
-  mix-blend-mode: soft-light;
-  opacity: 0;
-  transition: opacity 0.3s;
+  // mix-blend-mode: soft-light;
+  // opacity: 0;
+  // transform: scale(0);
+  // transition: 0.3s;
   &.is-active {
-    opacity: 1;
+    // opacity: 1;
+    // transform: scale(1);
+  }
+
+  span {
+    font-size: 28px;
+    line-height: 0.8;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+
+    opacity: 0;
+    transition: opacity 0.2s 0.3s;
   }
   
   &::before {
@@ -102,14 +118,26 @@ canvas {
     position: absolute;
     top: 0;
     left: 0;
-    width: 60px;
-    height: 60px;
-    background: #fff;
+    width: 90px;
+    height: 90px;
+    background: #ffc107;
     border-radius: 50%;
     pointer-events: none;
     transform-origin: 50% 50%;
-    transform: scale(1.0) translate(-50%, -50%);
+    // transform: scale(1.0) translate(-50%, -50%);
+    transform: scale(0) translate(-50%, -50%);
     // animation: scaleUp 3.0s cubic-bezier(0.87, 0, 0.13, 1) infinite;
+
+    transition: transform 0.4s;
+  }
+
+  &.is-active {
+    span {
+      opacity: 1;
+    }
+    &::before {
+      transform: scale(1.0) translate(-50%, -50%);
+    }
   }
 
 
